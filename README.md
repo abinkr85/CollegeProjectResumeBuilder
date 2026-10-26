@@ -1,180 +1,128 @@
-# 📄 Professional Resume Builder
+# ResumeForge – Professional Resume Builder
 
-A modern, feature-rich resume builder application that allows you to create, customize, and export professional resumes with ease. Built with vanilla JavaScript, CSS, and HTML for a smooth, client-side experience with no backend required.
+A modern resume builder for creating polished, professional resumes with live editing, multiple templates, ATS-friendly content, and export capabilities. Built with pure HTML, CSS, and JavaScript for a lightweight, browser-based experience.
 
-## 🌟 Features
+## Features
 
-### Core Functionality
-- **Multiple Resume Templates** - Choose from Modern, Classic, and Minimal designs
-- **Live Preview** - Real-time resume preview as you type
-- **Customizable Sections** - Personal info, experience, education, skills, projects, certifications, and more
-- **Profile Management** - Save multiple resume versions for different job applications
-- **Design Customization** - Change colors, fonts (Inter, Arial, Georgia), and layout options
+- Multiple resume templates: Modern, Classic, and Minimal
+- Live preview while editing
+- Personal, skills, education, experience, project, and custom section management
+- Save multiple resume profiles for different job applications
+- Design customization with accent colors, fonts, and dark mode
+- ATS score analysis for keyword optimization
+- JSON export/import for backup and restore
+- Password-protected PDF export
+- Shareable resume link generation
+- AI-powered summary generation
+- QR code support for portfolio/website links
+- Responsive layout for desktop and mobile viewing
 
-### Advanced Features
-- **PDF Export** - Download your resume as password-protected PDF
-- **Data Backup** - Export/import resume data as JSON files
-- **Local Storage** - All data saved locally in your browser (privacy-first approach)
-- **QR Code Integration** - Optionally add QR codes linking to your website
-- **Skill Ratings** - Add star ratings to showcase proficiency levels
-- **Hobbies/Interests** - Add personal interests and hobbies section
-- **Share Function** - Generate shareable resume links
+## Live Demo
 
-### Data Management
-- **One-Click Profile Switching** - Quickly switch between saved resume versions
-- **Responsive Design** - Works seamlessly on desktop and mobile devices
-- **Dark/Light Theme** - Built-in theme options for comfortable viewing
+Visit the app here:
 
-## 🎨 Language Composition
-- **JavaScript** - 44.1% (Interactive features & logic)
-- **CSS** - 37.1% (Styling & responsive design)
-- **HTML** - 18.8% (Semantic markup)
+https://abinkr85.github.io/CollegeProjectResumeBuilder/
 
-## 🚀 Live Demo
+## Tech Stack
 
-**[Click here to use the Resume Builder](https://abinkr85.github.io/CollegeProjectResumeBuilder/)**
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- html2pdf.js
+- QRCode.js
+- Browser localStorage for persistence
 
-Open the link above to start building your professional resume right now!
+## Project Structure
 
-## 📖 How to Use
+```text
+CollegeProjectResumeBuilder/
+├── assets/
+│   └── logo.png
+├── css/
+│   └── style.css
+├── js/
+│   ├── features.js
+│   └── script.js
+├── index.html
+├── README.md
+└── combine2.html
+```
 
-### Getting Started
-1. Visit the [live demo](https://abinkr85.github.io/CollegeProjectResumeBuilder/)
-2. Fill in your personal information in the **Info** tab
-3. Add your experience, education, skills, and other sections
-4. Customize the design in the **Design** tab
-5. Preview your resume with the Preview button
+## Getting Started
 
-### Save Your Work
-- Your resume data is automatically saved to your browser's local storage
-- Create multiple profiles for different job applications
-- Use the **Data** tab to export/import your resume data
-
-### Export Your Resume
-1. Click the **Export PDF** button
-2. Enter your name and date of birth (used to generate a PDF password)
-3. Download your password-protected resume
-
-### Share Your Resume
-1. Complete your resume
-2. Click the **Share** button
-3. Share the generated link with recruiters and employers
-
-## 💾 Installation (For Local Development)
+### Option 1: Run locally in a browser
 
 ```bash
-# Clone the repository
-git clone https://github.com/abinkr/Professional-Resume-Builder.git
-
-# Navigate to the directory
-cd Professional-Resume-Builder
-
-# Open in a web browser
-open index.html
-# or
-python -m http.server 8000  # Then visit http://localhost:8000
+git clone https://github.com/abinkr85/CollegeProjectResumeBuilder.git
+cd CollegeProjectResumeBuilder
+python -m http.server 8000
 ```
 
-## 📁 Project Structure
+Then open:
 
-```
-Professional-Resume-Builder/
-├── index.html          # Main application markup
-├── css/
-│   └── style.css       # All styling and responsive design
-├── js/
-│   ├── script.js       # Core resume builder logic
-│   └── features.js     # PDF export, import/export, sharing
-├── lib/
-│   └── html2pdf.js     # PDF generation library
-└── README.md          # This file
+```text
+http://localhost:8000
 ```
 
-## 🔧 Technical Stack
+### Option 2: Open directly
 
-- **Vanilla JavaScript** - No frameworks required
-- **HTML5** - Semantic markup for better accessibility
-- **CSS3** - Flexbox & Grid layouts for responsive design
-- **html2pdf.js** - Client-side PDF generation
-- **Local Storage API** - Browser-based data persistence
+You can also open `index.html` directly in a browser, though a local server is recommended for the most consistent experience.
 
-## ✨ Key Features Explained
+## How to Use
 
-### Multiple Templates
-- **Modern** - Two-column dark sidebar layout with accent colors
-- **Classic** - Top header with centered personal info
-- **Minimal** - Clean, two-column text-based layout
+1. Open the app in your browser.
+2. Fill in your personal details, education, experience, skills, and projects.
+3. Switch between templates and customize the design.
+4. Preview the resume live in the right panel.
+5. Save profiles or export/import resume data from the Data tab.
+6. Use the PDF export option to generate a protected resume document.
+7. Share your resume using the share link feature.
 
-### Design Customization
-- Select accent color for your resume
-- Choose from multiple font families
-- Toggle QR code display
-- Real-time preview updates
+## Features in Detail
 
-### Data Export & Import
-- **Export JSON** - Create backups of your resume data
-- **Import JSON** - Restore from previously saved backups
-- Works across browsers by downloading/uploading files
+### Resume Templates
 
-### Password-Protected PDFs
-- Automatic password generation based on name + DOB
-- Secure your resume with encryption
-- Prevents unauthorized editing and copying
+Choose from:
 
-## 🔒 Privacy & Security
+- Modern: clean and professional layout with a sidebar
+- Classic: balanced, traditional resume style
+- Minimal: simple and content-focused layout
 
-- **100% Client-Side** - No data sent to any server
-- **Local Storage Only** - Your resume data stays on your device
-- **No Tracking** - No analytics or data collection
-- **Optional PDF Protection** - Add password encryption to PDFs
+### ATS Analysis
 
-## 🎯 Use Cases
+The app includes a built-in ATS score check to help identify weak sections and improve keyword alignment.
 
-- **Job Applications** - Create tailored resumes for different positions
-- **Career Change** - Maintain multiple versions highlighting different skills
-- **Portfolio** - Showcase your professional experience and projects
-- **Networking** - Share your resume digitally with recruiters
+### Data Backup
 
-## 🤝 Contributing
+You can back up your resume as a JSON file and restore it later whenever needed.
 
-Contributions are welcome! Feel free to:
-- Report bugs
-- Suggest new features
-- Submit pull requests
-- Improve documentation
+### PDF Export
 
-## 📝 License
+The PDF export workflow includes a password generation process based on your name and date of birth for added document protection.
 
-This project is open source and available under the MIT License.
+## Privacy and Data Handling
 
-## 💡 Tips & Tricks
+This project stores data locally in the browser using `localStorage`, so your resume content stays on your device unless you intentionally export or share it.
 
-- **Pro Tip 1**: Save a profile template for quick resume creation
-- **Pro Tip 2**: Use the JSON export to backup your data regularly
-- **Pro Tip 3**: Test different templates and colors before final export
-- **Pro Tip 4**: Add a QR code to your website in the resume for easy access
-- **Pro Tip 5**: Keep skill ratings realistic (1-5 stars)
+## Contributing
 
-## 🐛 Troubleshooting
+Contributions are welcome. If you would like to improve the app, fix bugs, or add new features:
 
-**Q: My data disappeared!**
-- A: Check if you're using the same browser and haven't cleared local storage. Use the JSON export feature to backup your data.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
-**Q: PDF won't download**
-- A: Make sure to generate a password before downloading. Check your browser's download settings.
+## Support
 
-**Q: How do I switch templates?**
-- A: Go to the **Design** tab and select your preferred template from the dropdown menu.
+For questions, bug reports, or feature requests, please open an issue here:
 
-**Q: Can I share my resume with others?**
-- A: Yes! Click the **Share** button to generate a shareable link of your resume preview.
+https://github.com/abinkr85/CollegeProjectResumeBuilder/issues
 
-## 📞 Support
+## License
 
-For issues, questions, or suggestions, please [open an issue](https://github.com/abinkr/Professional-Resume-Builder/issues) on GitHub.
+This repository does not currently include a license file. If you plan to reuse or distribute the project, add an appropriate open-source license before publishing externally.
 
 ---
 
-**Built with ❤️ by [abinkr](https://github.com/abinkr)**
-
-**[⭐ Star this repo if you find it helpful!](https://github.com/abinkr/Professional-Resume-Builder)**
+Built with ❤️ for creating cleaner, more professional resumes.
