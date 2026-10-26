@@ -32,14 +32,14 @@ A modern, feature-rich resume builder application that allows you to create, cus
 
 ## 🚀 Live Demo
 
-**[Click here to use the Resume Builder](https://abinkr.github.io/Professional-Resume-Builder/)**
+**[Click here to use the Resume Builder](https://abinkr85.github.io/CollegeProjectResumeBuilder/)**
 
 Open the link above to start building your professional resume right now!
 
 ## 📖 How to Use
 
 ### Getting Started
-1. Visit the [live demo](https://abinkr.github.io/Professional-Resume-Builder/)
+1. Visit the [live demo](https://abinkr85.github.io/CollegeProjectResumeBuilder/)
 2. Fill in your personal information in the **Info** tab
 3. Add your experience, education, skills, and other sections
 4. Customize the design in the **Design** tab
