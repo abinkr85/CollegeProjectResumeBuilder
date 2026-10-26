@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<title>ResumeForge – Professional Resume Builder</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Build stunning, ATS-friendly resumes with multiple templates and export options.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <img src="assets/logo.png" class="logo-img" alt="Logo">
+    <span class="logo-text">ResumeForge</span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-icon-btn" onclick="checkATSScore()" title="ATS Score">📊 ATS</button>
+    <button class="nav-icon-btn" onclick="toggleDarkMode()" id="darkToggle" title="Dark Mode">🌙</button>
+    <span class="user-text">Hi, <span id="usernameDisplay"></span> 👋</span>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
+</nav>
+
+<!-- LEFT BUILDER PANEL -->
+<aside class="left-panel">
+  <button onclick="window.location.href='combine2.html'" class="back-btn">Back</button>
+  <h2 class="panel-title">Edit Resume</h2>
+
+  <!-- PROFILE SWITCHER -->
+  <div class="profile-bar">
+    <select id="profileSelect" onchange="loadSelectedProfile()" class="profile-select">
+      <option value="">— Default Profile —</option>
+    </select>
+    <button onclick="promptSaveProfile()" class="profile-action-btn" title="Save Profile">💾</button>
+    <button onclick="deleteSelectedProfile()" class="profile-action-btn danger" title="Delete">🗑</button>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('personal',this)">Personal</button>
+    <button class="tab-btn" onclick="showTab('skills',this)">Skills</button>
+    <button class="tab-btn" onclick="showTab('history',this)">History</button>
+    <button class="tab-btn" onclick="showTab('extra',this)">Extra</button>
+    <button class="tab-btn" onclick="showTab('design',this)">Design</button>
+    <button class="tab-btn" onclick="showTab('dataTab',this)">Data</button>
+  </div>
+
+  <!-- TAB: PERSONAL -->
+  <div id="personal" class="tab-content">
+    <label>Photo</label>
+    <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+      <img id="photoPreview" src="https://via.placeholder.com/70?text=📷" alt="Upload">
+      <span>Click to upload photo</span>
+      <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(event)" hidden>
+    </div>
+    <label>Full Name</label>
+    <input type="text" id="name" value="Hari Krishna" oninput="updateData()">
+    <label>Job Title</label>
+    <input type="text" id="title" value="Full Stack Developer" oninput="updateData()">
+    <label>Phone</label>
+    <input type="text" id="phone" value="+1 (656) 153-6577" oninput="updateData()">
+    <label>Email</label>
+    <input type="text" id="email" value="harikrishna@gmail.com" oninput="updateData()">
+    <label>Address</label>
+    <input type="text" id="address" value="148 Side Street, CA" oninput="updateData()">
+    <label>Website / LinkedIn</label>
+    <input type="text" id="website" value="www.harikrishna.dev" oninput="updateData()">
+    <label>Professional Summary</label>
+    <textarea id="profile" oninput="updateData()">Passionate full-stack developer with 5+ years of experience building scalable web applications. Skilled in React, Node.js, and cloud technologies.</textarea>
+    <button class="ai-btn" onclick="showAIModal()">✨ AI Generate Summary</button>
+  </div>
+
+  <!-- TAB: SKILLS -->
+  <div id="skills" class="tab-content hidden">
+    <label>Skills</label>
+    <div id="skillsContainer"></div>
+    <button class="add-btn" onclick="addSkill()">+ Add Skill</button>
+    <label>Languages</label>
+    <div id="langContainer"></div>
+    <button class="add-btn" onclick="addLanguage()">+ Add Language</button>
+  </div>
+
+  <!-- TAB: HISTORY -->
+  <div id="history" class="tab-content hidden">
+    <label>Education</label>
+    <div id="eduContainer"></div>
+    <button class="add-btn" onclick="addEducation()">+ Add Education</button>
+    <label>Work Experience</label>
+    <div id="expContainer"></div>
+    <button class="add-btn" onclick="addExperience()">+ Add Experience</button>
+    <label>Projects</label>
+    <div id="projContainer"></div>
+    <button class="add-btn" onclick="addProject()">+ Add Project</button>
+  </div>
+
+  <!-- TAB: EXTRA -->
+  <div id="extra" class="tab-content hidden">
+    <label>Certifications</label>
+    <div id="certContainer"></div>
+    <button class="add-btn" onclick="addCertification()">+ Add Certification</button>
+
+    <label>Hobbies &amp; Interests</label>
+    <div id="hobbyContainer" class="tag-container"></div>
+    <div class="tag-input-row">
+      <input type="text" id="hobbyInput" placeholder="Type a hobby, press Enter">
+      <button onclick="addHobby()" class="add-btn inline">Add</button>
+    </div>
+
+    <label>References</label>
+    <div id="refContainer"></div>
+    <button class="add-btn" onclick="addReference()">+ Add Reference</button>
+
+    <label>Custom Sections</label>
+    <div id="customContainer"></div>
+    <button class="add-btn" onclick="addCustomSection()">+ Add Custom Section</button>
+  </div>
+
+  <!-- TAB: DESIGN -->
+  <div id="design" class="tab-content hidden">
+    <label>Resume Template</label>
+    <div class="template-grid">
+      <div class="template-card active" onclick="switchTemplate('modern',this)">
+        <div class="t-thumb modern-thumb">
+          <div class="t-s"></div><div class="t-c"><div class="t-l h"></div><div class="t-l"></div><div class="t-l"></div></div>
+        </div>
+        <span>Modern</span>
+      </div>
+      <div class="template-card" onclick="switchTemplate('classic',this)">
+        <div class="t-thumb classic-thumb">
+          <div class="t-h"></div><div class="t-b"><div class="t-l h"></div><div class="t-l"></div><div class="t-l"></div></div>
+        </div>
+        <span>Classic</span>
+      </div>
+      <div class="template-card" onclick="switchTemplate('minimal',this)">
+        <div class="t-thumb minimal-thumb">
+          <div class="t-l h" style="border-left:3px solid #2563EB;padding-left:5px"></div>
+          <div class="t-l"></div><div class="t-l short"></div><div class="t-l"></div>
+        </div>
+        <span>Minimal</span>
+      </div>
+    </div>
+
+    <label>Accent Color</label>
+    <div class="color-picker">
+      <span class="color-dot active" style="background:#2563EB" onclick="setAccentColor('#2563EB','#1D4ED8',this)" title="Royal Blue"></span>
+      <span class="color-dot" style="background:#059669" onclick="setAccentColor('#059669','#047857',this)" title="Emerald"></span>
+      <span class="color-dot" style="background:#7C3AED" onclick="setAccentColor('#7C3AED','#6D28D9',this)" title="Violet"></span>
+      <span class="color-dot" style="background:#E11D48" onclick="setAccentColor('#E11D48','#BE123C',this)" title="Rose"></span>
+      <span class="color-dot" style="background:#D97706" onclick="setAccentColor('#D97706','#B45309',this)" title="Amber"></span>
+      <span class="color-dot" style="background:#475569" onclick="setAccentColor('#475569','#334155',this)" title="Slate"></span>
+    </div>
+
+    <label>Body Font</label>
+    <select id="fontSelect" class="select-input" onchange="setFont(this.value)">
+      <option value="Inter">Inter (Modern Sans)</option>
+      <option value="'Playfair Display'">Playfair Display (Classic Serif)</option>
+      <option value="Georgia">Georgia (Serif)</option>
+    </select>
+
+    <label>Show QR Code on Resume</label>
+    <div class="toggle-row">
+      <label class="toggle"><input type="checkbox" id="qrToggle" onchange="updateData()"><span class="slider"></span></label>
+      <span class="toggle-label">Add QR code linking to your website</span>
+    </div>
+  </div>
+
+  <!-- TAB: DATA -->
+  <div id="dataTab" class="tab-content hidden">
+    <div class="data-card">
+      <h4>📦 Save as New Profile</h4>
+      <p class="hint-text">Keep multiple resume versions (Dev, Designer, etc.)</p>
+      <input type="text" id="newProfileName" placeholder="Profile name (e.g. Dev Resume)">
+      <button class="btn-primary" onclick="saveNewProfile()">💾 Save Profile</button>
+    </div>
+    <div class="data-card">
+      <h4>📤 Export Resume Data</h4>
+      <p class="hint-text">Download all your resume data as a JSON backup file.</p>
+      <button class="btn-primary" onclick="exportJSON()">⬇ Export JSON</button>
+    </div>
+    <div class="data-card">
+      <h4>📥 Import Resume Data</h4>
+      <p class="hint-text">Restore from a previously exported JSON file.</p>
+      <input type="file" id="jsonFileInput" accept=".json" onchange="importJSON(event)" hidden>
+      <button class="btn-outline" onclick="document.getElementById('jsonFileInput').click()">📂 Import JSON File</button>
+    </div>
+    <div class="data-card danger-zone">
+      <h4>⚠️ Danger Zone</h4>
+      <button class="btn-danger" onclick="clearAllData()">🗑 Clear All Data</button>
+    </div>
+  </div>
+</aside>
+
+<!-- RESUME PREVIEW -->
+<div class="resume-wrapper">
+  <!-- TOP ACTION BUTTONS -->
+  <div class="top-buttons">
+    <button class="preview-btn" onclick="previewResume()">👁 Preview</button>
+    <button class="share-btn" onclick="shareResume()">🔗 Share</button>
+    <button class="export-btn" onclick="showPasswordPopup()">⬇ Export PDF</button>
+  </div>
+
+  <div class="resume" id="resume" data-template="modern"></div>
+</div>
+
+<!-- MODAL: PDF Export -->
+<div id="passwordPopup" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('passwordPopup').style.display='none'">✕</button>
+    <h3>🔐 Protect Your PDF</h3>
+    <p class="hint-text">Password = First 4 letters of name + DOB (DDMM)</p>
+    <label>Your Name</label>
+    <input type="text" id="userName" placeholder="Enter your name">
+    <label>Date of Birth</label>
+    <input type="date" id="userDOB">
+    <button class="btn-primary" onclick="generatePassword()">Generate Password</button>
+    <p id="generatedPassword" class="generated-pwd"></p>
+    <button class="btn-primary" onclick="finalDownload()">⬇ Download Resume PDF</button>
+  </div>
+</div>
+
+<!-- MODAL: ATS Score -->
+<div id="atsModal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('atsModal').style.display='none'">✕</button>
+    <h3>📊 ATS Score Analysis</h3>
+    <div id="atsResult"></div>
+  </div>
+</div>
+
+<!-- MODAL: AI Summary -->
+<div id="aiModal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('aiModal').style.display='none'">✕</button>
+    <h3>✨ AI Summary Generator</h3>
+    <label>Years of Experience</label>
+    <input type="number" id="aiYears" placeholder="e.g. 5" min="0" max="50">
+    <label>Key Strength / Specialization</label>
+    <input type="text" id="aiStrength" placeholder="e.g. scalable web apps, cloud infrastructure">
+    <label>Career Goal</label>
+    <input type="text" id="aiGoal" placeholder="e.g. lead engineering teams at high-growth startups">
+    <button class="btn-primary" onclick="generateAISummary()">✨ Generate</button>
+    <div id="aiResult" class="ai-result-box"></div>
+    <button id="aiApplyBtn" onclick="applySummary()" class="btn-outline" style="display:none;margin-top:12px">✅ Apply to Resume</button>
+  </div>
+</div>
+
+<!-- MODAL: Share Link -->
+<div id="shareModal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('shareModal').style.display='none'">✕</button>
+    <h3>🔗 Share Resume Link</h3>
+    <p class="hint-text">This link encodes your resume data. Anyone with it can view your resume.</p>
+    <textarea id="shareLink" readonly class="share-link-box"></textarea>
+    <button class="btn-primary" onclick="copyShareLink()">📋 Copy Link</button>
+  </div>
+</div>
+
+<!-- MOBILE FLOATING ACTION BUTTON -->
+<button id="mobileFAP" class="mobile-fab" onclick="toggleMobileView()">👁 Preview</button>
+
+<script src="js/script.js"></script>
+<script src="js/features.js"></script>
+</body>
+</html>
